@@ -1,76 +1,65 @@
-# Create and Mint Token Project
+# CustomToken - ERC20 Token Project
 
-## Overview
+This project implements a custom ERC20 token using OpenZeppelin contracts. The token can be minted by the owner, transferred by any user, and burned by any token holder.
 
-CustomToken is a flexible and secure implementation of a token system similar to ERC20 tokens on the Ethereum blockchain. This project consists of two main components: the CustomToken contract and the ITokenInterface.
-
-## Features
-
-- Create and manage a custom token with a name, symbol, and decimal places
-- Mint new tokens (token creation)
-- Burn existing tokens (token destruction)
-- Transfer tokens between addresses
-- Security measures to prevent common vulnerabilities
-
-## Contract Files
-
-1. `CustomToken.sol`: The main contract implementing the token functionality
-2. `ITokenInterface.sol`: An interface defining the core functions of the token
-
-## Requirements
-
-- Solidity ^0.8.26
-- Ethereum development environment (e.g., Remix, Truffle, or Hardhat)
-
-## Deployment
-
-To deploy the CustomToken contract, you'll need to provide the following parameters:
-
-- `_tokenName`: The name of your token
-- `_tokenSymbol`: The symbol (ticker) of your token
-- `_tokenDecimals`: The number of decimal places for token amounts
-- `_initialMint`: The initial supply of tokens to create
-
-Example deployment using Remix:
+## Deployment Instructions (using Remix)
 
 1. Open Remix IDE (https://remix.ethereum.org/)
-2. Create new files for `CustomToken.sol` and `ITokenInterface.sol`, and paste the respective code
-3. Compile the contracts using Solidity Compiler 0.8.26
-4. Navigate to the "Deploy & Run Transactions" tab
-5. Select "CustomToken" from the contract dropdown
-6. Fill in the constructor parameters
-7. Click "Deploy" and confirm the transaction
 
-## Main Functions
+2. Create a new file named `CustomToken.sol` and paste the provided contract code.
 
-- `sendTokens(address _recipient, uint256 _amount)`: Transfer tokens to another address
-- `createTokens(address _recipient, uint256 _amount)`: Mint new tokens (only callable by token creator)
-- `destroyTokens(uint256 _amount)`: Burn tokens
+3. In the "File Explorer" tab, create a new folder named `@openzeppelin`.
 
-## Events
+4. Inside the `@openzeppelin` folder, create subfolders: `contracts/token/ERC20` and `contracts/access`.
 
-- `TokensSent(address sender, address recipient, uint256 amount)`: Emitted when tokens are transferred
-- `TokensBurned(address indexed burner, uint256 amount)`: Emitted when tokens are burned
-- `TokensCreated(address indexed recipient, uint256 amount)`: Emitted when new tokens are minted
+5. In the Remix file explorer, click on the "GitHub" icon (usually in the middle panel).
 
-## Security Considerations
+6. Search for "OpenZeppelin/openzeppelin-contracts" and import the following files:
+   - `@openzeppelin/contracts/token/ERC20/ERC20.sol`
+   - `@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol`
+   - `@openzeppelin/contracts/access/Ownable.sol`
 
-- The contract includes checks for overflow and underflow
-- Certain functions are restricted to the token creator
-- The contract prevents interactions with the zero address
+7. In the "Solidity Compiler" tab:
+   - Select compiler version 0.8.26 or later
+   - Click "Compile CustomToken.sol"
 
-## License
+8. In the "Deploy & Run Transactions" tab:
+   - Select "Injected Web3" as the environment (ensure MetaMask is connected)
+   - Select "CustomToken" from the contract dropdown
+   - Fill in the constructor parameters:
+     - name: Your token name (e.g., "MyToken")
+     - symbol: Your token symbol (e.g., "MTK")
+     - decimalsAmount: Number of decimal places (e.g., 18)
+   - Click "Deploy"
 
-This project is licensed under the MIT License.
+9. Confirm the transaction in MetaMask
 
-## Disclaimer
+## Interacting with the Contract
 
-This code is provided as-is and has not been audited. Use at your own risk in production environments.
+After deployment, you can interact with the contract using Remix's interface:
 
-## Contributing
+1. Minting tokens (only owner):
+   - Expand the deployed contract
+   - Find the "mint" function
+   - Enter the recipient address and amount (in wei)
+   - Click "transact" and confirm in MetaMask
 
-Contributions, issues, and feature requests are welcome. Feel free to check issues page if you want to contribute.
+2. Transferring tokens:
+   - Use the "transfer" function
+   - Enter the recipient address and amount
+   - Click "transact" and confirm in MetaMask
 
-## Contact
+3. Burning tokens:
+   - Use the "burn" function
+   - Enter the amount to burn
+   - Click "transact" and confirm in MetaMask
 
-For any questions or concerns, please open an issue in the project repository.
+4. Checking balance:
+   - Use the "balanceOf" function
+   - Enter an address to check its balance
+
+## Notes
+
+- Ensure you're connected to the desired network in MetaMask before deploying
+- The account used to deploy the contract becomes the owner
+- All token amounts are in wei (smallest unit). For example, 1 token with 18 decimals is represented as 1000000000000000000
